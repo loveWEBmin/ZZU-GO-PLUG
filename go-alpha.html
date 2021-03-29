@@ -54,9 +54,9 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 </div>
 
 <div id="bak_1" style="text-align:center">
-	<h2>
-		张三の通行码
-	</h2>
+	<h3>
+		郑州大学通行码
+	</h3>
 	<form>
 			<div>
 				<label>姓名:</label>
@@ -108,10 +108,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		
 		<br>  
 		<div>
-				   <em> ********************** </em><br>
-				   <em> **下划留言，支持匿名** </em><br>
-				   <em> **言论自由，禁发广告** </em><br>
-				   <em> ********************** </em>
+				   <em> **下划留言，支持匿名，自由言论** </em>
 		</div>
 		<div>
 			-------------------------------------------<br>
@@ -198,7 +195,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		let b = document.querySelector("input[name='email']").value;
 		let c = document.querySelector("input[name='password']").value;
 		
-		document.querySelector("span[id='collageAndName']").innerHTML = a+"　"+b;
+		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
 		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".入口";
 		
 		if(document.querySelector("[value='back2skuY']").checked){
