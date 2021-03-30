@@ -105,8 +105,9 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 			
 		</div>
 		<div><br>
-			3.请将将上图替换为带有自己头像的二维码<br>
-			二维码在扫码入校界面自行进行保存
+			3.选取文件时请选取自己的二维码图片<br>
+			请<span style="text-decoration:underline; color:blue"><a href="https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=s&door=0021">点击此处</a></span>自行保存个人二维码<br>
+			正常情况下只能在周末访问并获取
 		</div>
 		<div>	<br>
 			4.有多种原因会造成“未检测到今天的出校记录”<br>
@@ -136,13 +137,14 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		<span id="busuanzi_container_site_pv" style="color: white;">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 	</div>
                                                                      
-    <div id="vcomments" style="width: 100%;"></div>
+    <div id="vcomments" style="padding-left: 20px;padding-right: 20px;"></div>
     <script>
         new Valine({
             el: '#vcomments',
             appId: 'PyYe5eld7is58m5aOQ26YJpd-MdYXbMMI',
             appKey: 'bonpNK2iVLljo5wfyL9Fy1jC',
 	    meta : ['nick'],
+	    avatar : 'hide',
 	    // 设置Bilibili表情包地址
 	    emojiCDN: '//i0.hdslb.com/bfs/emote/', 
 	    // 表情title和图片映射
