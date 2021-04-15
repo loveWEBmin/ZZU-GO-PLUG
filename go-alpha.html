@@ -83,7 +83,8 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 			</div>
 	</form>
 	<br>
-	<button onclick="showBlock521()">生成通行码</button>
+	<button onclick="showBlock521()">生成入校通行码</button>
+	<button onclick="out()">生成出校通行码</button>
 	<span style="font-family: "黑体">
 		<br>
 		<br>
@@ -216,7 +217,27 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		
 
 	}
-	
+											     
+	function out(){
+		let dta = new Date();
+		document.getElementById("datetimenow").innerHTML = (("0"+(dta.getMonth()+1)).slice(-2)) +"月"+(("0"+dta.getDate()).slice(-2)) +"日" +" "+ (("0"+dta.getHours()).slice(-2)) +":"+ (("0"+dta.getMinutes()).slice(-2))+"      ";
+		document.getElementById("tim317").innerHTML = "10分00秒";
+		document.querySelector("div[id='bak_1']").style.display='none';
+		document.querySelector("div[id='bak_0']").style.display='block';
+		
+		let a = document.querySelector("input[name='firstname']").value;
+		let b = document.querySelector("input[name='email']").value;
+		let c = document.querySelector("input[name='password']").value;
+		
+		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
+		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".出口";
+		
+		if(document.querySelector("[value='back2skuY']").checked){
+			document.querySelector("span[id='tipNoRecord']").style.display="none";
+		}
+		
+
+	}
 	
 </script>
 
