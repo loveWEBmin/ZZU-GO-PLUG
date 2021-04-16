@@ -71,6 +71,15 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 				<input type="text" name="password" placeholder="eg:主校区大门北门">
 			</div>
 			<div>
+				<label>出入身份</label>
+				<select>
+				    <option value="1">请假被批准的学生</option>
+				    <option value="2">研究生</option>
+				    <option value="3">法外狂徒</option>
+				    
+				</select>
+			</div>
+			<div>
 				<img src="./test.jpg" id="image" width="200"  style="display:flex vertical-align:middle;" >
 			</div>
 			<div>
@@ -81,14 +90,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 				<input type="radio" name="back2skuY" value="back2skuY">是
 				<input type="radio" name="back2skuY" value="back2skuN">否
 			</div>
-			<div>
-				出入身份
-				<select>
-				    <option value="1">请假被批准的学生</option>
-				    <option value="2">研究生</option>
-				    <option value="3">法外狂徒</option>
-				</select>
-			</div>
+			
 	</form>
 	<br>
 	<button onclick="showBlock521()">入校通行码</button>
