@@ -14,19 +14,7 @@
   function zzjCallOneUrl(us){
     document.getElementById("zzj_fun_426s").src=us;
   }
-var timeID=0;
-var tt1=600;
-tt2=0;
-tt3=0;
-var timeID=setInterval("hnceTimer()",1000);
-function hnceTimer(){
-  tt1--;
-  if (tt1>=0){
-  tt2=tt1 % 60;
-  tt3=(tt1-tt2)/60;
-  document.getElementById("tim317").innerHTML=tt3+"分"+tt2+"秒";
-  }else{document.getElementById("tim317").innerHTML="已作废";}
-}
+
 </script>
 
 <!-- <script src='//unpkg.com/valine/dist/Valine.min.js'></script> -->
@@ -230,7 +218,19 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		let m_identity = document.querySelector("span[id='m_identity']");
 		m_identity.innerHTML = m_id_text;
 		
-		
+		var timeID=0;
+		var tt1=600;
+		tt2=0;
+		tt3=0;
+		var timeID=setInterval("hnceTimer()",1000);
+		function hnceTimer(){
+		  tt1--;
+		  if (tt1>=0){
+		  tt2=tt1 % 60;
+		  tt3=(tt1-tt2)/60;
+		  document.getElementById("tim317").innerHTML=tt3+"分"+tt2+"秒";
+		  }else{document.getElementById("tim317").innerHTML="已作废";}
+		}
 
 	}
 	function out(){
