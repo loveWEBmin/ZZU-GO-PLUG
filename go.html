@@ -30,6 +30,18 @@ function hnceTimer(){
 	  }else{document.getElementById("tim317").innerHTML="已作废";}
 	}
 }
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
 </script>
 
 <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
@@ -99,14 +111,19 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 	<br>
 	<button onclick="showBlock521()">入校通行码</button>
 	<button onclick="out()">出校通行码</button>
+	<br>
+	<br>
+	<br>
+	<button onclick="last_time_in()">和上次入校一样</button>
+	<button onclick="last_time_out()">和上次出校一样</button>
 	<span style="font-family: "黑体">
 		<br>
 		<br>
 		<br>
 
-<!-- 		<div>
+ 		<div>
 			-------------------Tips:-------------------<br>
-			
+		<!--	
 		</div>
 		
 		<div><br>
@@ -128,7 +145,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 			4.有多种原因会造成“未检测到今天的出校记录”<br>
 			通过选择是否"当日返校"来隐藏或显示此信息<br>
 		</div>
-		
+		-->
 		<br>  
  		<div>
 				   <em> ********************** </em><br>
@@ -136,12 +153,13 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 				   <em> *言论自由，禁止广告* </em><br>
 				   <em> ********************** </em>
 		</div> 
+		
 		<div>
 			-------------------------------------------<br>
-		</div> -->
+		</div> 
 <!-- 		<div>
 			<img alt="GitHub" src="https://img.shields.io/github/license/21wang12/zzugo">
-		</div> -->
+		</div> 
 	</span>
 <!-- 	<div style="text-align: center; ">
 		<br>
@@ -151,7 +169,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 		<span id="busuanzi_container_site_pv" style="color: white;">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 	</div> -->
-<!--                                                                      
+                                                                  
 <div id="vcomments" style="padding-left: 20px;padding-right: 20px;"></div>
     <script>
         new Valine({
@@ -191,7 +209,7 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
     </script>
 
 	
-</div>-->
+</div>
  
 <script>
 	// 将背景隔离
@@ -201,14 +219,22 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 	let showQRCodeEl = document.querySelector("img");
 	var width = 400;
 	function handleFiles() {
-	  var filesToUpload = document.getElementById('input').files;
-	  var file = filesToUpload[0];
-	
+		var filesToUpload = document.getElementById('input').files;
+		var file = filesToUpload[0];
 		let uploadImgSrc = window.URL.createObjectURL(file);
-		
 		showQRCodeEl.src = uploadImgSrc; 
-		
 		img.src = uploadImgSrc
+		
+		const reader = new FileReader();
+		reader.onloadend = () => {
+		    // convert file to base64 String
+		    const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+		    // store file
+		    localStorage.setItem('choosenQRcode', base64String);
+		    
+		  };
+		reader.readAsDataURL(file);
+		
 	}
 	
 	function showBlock521(){
@@ -222,20 +248,24 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		let a = document.querySelector("input[name='firstname']").value;
 		let b = document.querySelector("input[name='email']").value;
 		let c = document.querySelector("input[name='password']").value;
-		
+		localStorage.setItem('firstname', a);
+		localStorage.setItem('email', b);
+		localStorage.setItem('password', c);
 		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
 		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".入口";
 		
 		if(document.querySelector("[value='back2skuN']").checked){
+			localStorage.setItem('back2skuY', "true");
 			document.querySelector("span[id='tipNoRecord']").style.display="none";
+		}else{
+			localStorage.setItem('back2skuY', "false");
 		}
 		let m_select = document.querySelector("select");
 		let idx = m_select.selectedIndex;
 		let m_id_text = "　出入身份："+m_select.options[idx].text;
+		localStorage.setItem('identity', m_id_text);
 		let m_identity = document.querySelector("span[id='m_identity']");
 		m_identity.innerHTML = m_id_text;
-		
-
 	}
 	function out(){
 		start = true;
@@ -248,23 +278,73 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
 		let a = document.querySelector("input[name='firstname']").value;
 		let b = document.querySelector("input[name='email']").value;
 		let c = document.querySelector("input[name='password']").value;
+		localStorage.setItem('firstname', a);
+		localStorage.setItem('email', b);
+		localStorage.setItem('password', c);
 		
 		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
 		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".出口";
 		
 		if(document.querySelector("[value='back2skuY']").checked){
+			localStorage.setItem('back2skuY', "true");
 			document.querySelector("span[id='tipNoRecord']").style.display="none";
+		}else{
+			localStorage.setItem('back2skuY', "false");
 		}
 		document.querySelector("span[id='tipNoRecord']").style.display='none';
-		
+		localStorage.setItem('back2skuY', "false");
 		let m_select = document.querySelector("select");
 		let idx = m_select.selectedIndex;
 		let m_id_text = "　出入身份："+m_select.options[idx].text;
+		localStorage.setItem('identity', m_id_text);
 		let m_identity = document.querySelector("span[id='m_identity']");
 		m_identity.innerHTML = m_id_text;
 
 	}
 	
+	function last_time_in(){
+		start = true;
+		let a = localStorage.getItem('firstname');
+		let b = localStorage.getItem('email');
+		let c = localStorage.getItem('password');
+		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
+		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".入口";
+		
+		if(localStorage.getItem('back2skuY')=="true"){
+			document.querySelector("span[id='tipNoRecord']").style.display="none";
+		}
+		let m_identity = document.querySelector("span[id='m_identity']");
+		m_identity.innerHTML = localStorage.getItem("identity");
+		
+		var dataImage = localStorage.getItem('choosenQRcode');
+		showQRCodeEl.src = "data:image/png;base64," + dataImage;
+		img.src =  "data:image/png;base64," + dataImage;
+		document.querySelector("div[id='bak_1']").style.display='none';
+		document.querySelector("div[id='bak_0']").style.display='block';
+	}
+	
+	function last_time_out(){
+		start = true;
+		let a = localStorage.getItem('firstname');
+		let b = localStorage.getItem('email');
+		let c = localStorage.getItem('password');
+		document.querySelector("span[id='collageAndName']").innerHTML = b+"　"+a;
+		document.querySelector("span[id='door']").innerHTML = "通行信息："+c+".出口";
+		
+		if(localStorage.getItem('back2skuY')=="true"){
+			document.querySelector("span[id='tipNoRecord']").style.display="none";
+		}
+		document.querySelector("span[id='tipNoRecord']").style.display="none";
+		let m_identity = document.querySelector("span[id='m_identity']");
+		m_identity.innerHTML = localStorage.getItem("identity");
+		
+		var dataImage = localStorage.getItem('choosenQRcode');
+		showQRCodeEl.src = "data:image/png;base64," + dataImage;
+		img.src =  "data:image/png;base64," + dataImage;
+		document.querySelector("div[id='bak_1']").style.display='none';
+		document.querySelector("div[id='bak_0']").style.display='block';
+		
+	}
 </script>
 
 <div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
@@ -273,10 +353,4 @@ document.getElementById("datetimenow").innerHTML = (("0"+(dt.getMonth()+1)).slic
       <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
       <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
     </div>
-	
-	
-    
-	
-    
-	
 </body></html>
