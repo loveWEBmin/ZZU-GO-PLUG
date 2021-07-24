@@ -3,6 +3,11 @@
 ## 功能
 一键生成郑州大学通行码
 
+## 运行截图
+
+![image](https://user-images.githubusercontent.com/38482259/126856831-1b0731ad-6b08-4130-9e33-3d4077112b8b.png)
+
+
 ## 用法
 1. 入口地址为：https://21wang12.github.io/zzugo/go.html
 2. 或保存下列二维码进行扫描
