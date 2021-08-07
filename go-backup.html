@@ -65,14 +65,13 @@
                 <span id="door">　通行信息：主校区大门北门.入口</span><br>　出入身份：请假被批准的学生<br>　<span
                 style="color:#f00" id="tipNoRecord">提醒：未检索到你今天的出校记录</span>
         </div>
-        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(/images/split5.png)"></div>
-        <div style="width:100%;min-height:25px;line-height:25px;font-size:14px;color:#333;text-align:center;
+        <div style="width:100%;height:0px;BACKGROUND-IMAGE: url(/images/split5.png)"></div>
+        <div style="min-height:25px;font-size:14px;color:#333;text-align:center;
                             border-style: solid;
-                            border-width: 15px;
-                            position:relative;
-                            left: -15px;
-                            border-color: #bc0cd0;">
-            <img src="./test.jpg" style="width:350px;border:0px;"></div>
+                            border-width: 10px;
+
+                            border-color: #049c0c">
+            <img src="./test.jpg" style="width:325px;border:0px;"></div>
         <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(/images/split5.png)"></div>
         <div style="width:100%;min-height:18px;line-height:18px;font-size:12px;color:#666;text-align:center">
             郑州大学疫情防控领导小组、保卫处、信息化办公室
@@ -250,7 +249,7 @@
         let c = document.querySelector("input[name='password']").value;
 
         document.querySelector("span[id='collageAndName']").innerHTML = b + "　" + a;
-        document.querySelector("span[id='door']").innerHTML = "通行信息：" + c + ".入口";
+        document.querySelector("span[id='door']").innerHTML = "通行信息：" + c + ".<span style='background-color: #049c0c; color: yellow;'>入口</span>";
 
         if (document.querySelector("[value='back2skuY']").checked) {
             document.querySelector("span[id='tipNoRecord']").style.display = "none";
